@@ -11,8 +11,12 @@ import java.util.stream.IntStream;
 public class KMP {
 
     public static void main(String [] args){
-        String sourceString = "XGABCDEFHIJKAGSXRFFABCDEIJKLMOPQRABCDJKLMOPQDDxxxABCDEIJKLMOPQRABCDJKLMOPQDD";
-        String matchTargetString = "ABCDEIJKLMOPQRABCDJKLMOPQDD";
+        //String sourceString = "XGABCDEFHIJKAGSXRFFABCDEIJKLMOPQRABCDJKLMOPQDDxxxABCDEIJKLMOPQRABCDJKLMOPQDD";
+        //String matchTargetString = "ABCDEIJKLMOPQRABCDJKLMOPQDD";
+
+        String sourceString = "ABCDABCDAB";
+        String matchTargetString = "ABCDAB";
+
         List<Integer> matchTable = getMatchHopsTable(matchTargetString);
 
         //当部分匹配 ，回退i， j置 0
@@ -55,7 +59,10 @@ public class KMP {
                     System.out.println("found one match, i:" +i +", matchIdx: " + matchIdx
                             + ", start index: " + (i+1 - matchIdx)
                             +  ", string:" +  sourceString.substring(i + 1 - matchIdx, i +1));
-                    matchIdx = 0;
+
+
+                    //matchIdx = 0;
+                    matchIdx = matchTable.get(matchIdx -1 );
                 }
 
             }else{
